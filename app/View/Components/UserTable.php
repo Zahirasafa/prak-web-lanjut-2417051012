@@ -1,0 +1,22 @@
+<?php
+
+namespace App\View\Components;
+
+use Closure;
+use Illuminate\Contracts\View\View;
+use Illuminate\View\Component;
+
+class UserTable extends Component
+{
+    public $users;
+
+    public function __construct($users)
+    {
+        $this->users = $users;
+    }
+
+    public function render(): View|Closure|string
+    {
+        return view('components.user-table');
+    }
+}
