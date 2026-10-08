@@ -13,25 +13,28 @@
                     <table class="table table-hover align-middle table-ungu">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nama Mata Kuliah</th>
-                                <th>SKS</th>
+                                <td>ID</td>
+                                <td>Nama Mata Kuliah</td>
+                                <td>SKS</td>
+                                <td>Aksi</td>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($mks as $mk)
+                            @foreach ($mks as $mk)
                                 <tr>
-                                    <td><small>{{ $mk->id }}</small></td>
+                                    <td>{{ $mk->id }}</td>
                                     <td>{{ $mk->nama_mk }}</td>
-                                    <td><span class="badge badge-kuning">{{ $mk->sks }} SKS</span></td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="3" class="text-center text-muted py-4">
-                                        Belum ada data mata kuliah.
+                                    <td>{{ $mk->sks }} SKS</td>
+                                    <td>
+                                        <a href="{{ route('matakuliah.edit', $mk->id) }}">Edit</a>
+                                        <form action="{{ route('matakuliah.destroy', $mk->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
